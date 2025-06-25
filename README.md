@@ -1,2 +1,2 @@
-# Cek-dosa
+# Cek-dosa with Go
 Havefun je...
