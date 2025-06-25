@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cek Dosamu</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --bg-color: #1a1a2e;
+            --card-color: #16213e;
+            --primary-color: #0f3460;
+            --accent-color: #e94560;
+            --text-color: #dcdcdc;
+            --title-color: #ffffff;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            background-color: var(--card-color);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            border: 1px solid var(--primary-color);
+        }
+
+        h1 {
+            color: var(--title-color);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        p {
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+
+        .input-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        
+        .input-field::placeholder {
+            color: #888;
+        }
+
+        .submit-btn {
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            background-color: var(--accent-color);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            background-color: #ff5c7a;
+        }
+
+        .hasil-container {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: var(--bg-color);
+            border-radius: 10px;
+        }
+
+        .hasil-container h2 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .skor {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--title-color);
+            margin: 10px 0;
+        }
+        
+        footer {
+            margin-top: 30px;
+            font-size: 0.8rem;
+            opacity: 0.6;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cek Dosa</h1>
+
+        <form class="input-form" action="/" method="POST">
+            <input class="input-field" type="text" name="nama" placeholder="Ketik namamu di sini...">
+            <button class="submit-btn" type="submit">Cek!</button>
+        </form>
+
+        {{ if .TampilkanHasil }}
+        <div class="hasil-container">
+            <h2>Hasil untuk {{ .Nama }}</h2>
+            <p class="skor" id="skor-value">{{ .Skor }}</p>
+            <p>"{{ .Pesan }}"</p>
+        </div>
+        {{ end }}
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const skorElement = document.getElementById('skor-value');
+            
+            if (skorElement) {
+                let skorAngka = parseInt(skorElement.textContent, 10);
+                
+                skorElement.textContent = skorAngka.toLocaleString('id-ID');
+            }
+        });
+    </script>
+</body>
+</html>
